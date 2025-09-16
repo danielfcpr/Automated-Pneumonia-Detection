@@ -1,14 +1,11 @@
 # api/app.py
 import os
 from typing import Literal
-
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
-
 import numpy as np
 import keras
-
 from utils.preprocessing import decode_and_preprocess
 
 # ----- Config -----
