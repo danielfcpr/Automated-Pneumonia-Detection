@@ -9,6 +9,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 API_URL = os.getenv("API_URL")
+if API_URL is None:
+    raise RuntimeError("API_URL env var is not set. Set it to your FastAPI /predict endpoint.")
 
 def infer(image_np: np.ndarray):
     """
@@ -64,4 +66,4 @@ demo = gr.Interface(
 
 if __name__ == "__main__":
     # Gradio default port is
-    demo.launch(server_name="127.0.0.1", server_port=8080, show_api=False, share=True)
+    demo.launch(server_name="0.0.0.0", server_port=8080, show_api=False, share=False)
