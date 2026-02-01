@@ -134,6 +134,12 @@ This ensures reliability and reproducibility across environments.
 The model and predictions are not clinically validated
 
 ---
+## Deployment
+
+The application is deployed on Azure Container Apps.
+Docker images are built using Azure Container Registry (ACR) remote builds and
+then rolled out to the running services.
+---
 ## Author
 
 **Daniel Calvo Pérez**  
