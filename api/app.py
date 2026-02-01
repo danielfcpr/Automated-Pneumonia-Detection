@@ -1,4 +1,3 @@
-# api/app.py
 import os
 from typing import Literal
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -9,10 +8,15 @@ import keras
 from utils.preprocessing import decode_and_preprocess
 
 # ----- Config -----
-MODEL_PATH = os.getenv("MODEL_PATH", "models/CNN_model.keras")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.getenv(
+    "MODEL_PATH",
+    os.path.join(BASE_DIR, "models", "CNN_model.keras"),
+)
 IMAGE_CONTENT_TYPES = {"image/png", "image/jpeg"}
 APP_TITLE = "Pneumonia Inference API"
 APP_VERSION = "0.1.0"
+MODEL_VERSION = "v1"
 
 # ----- App -----
 app = FastAPI(title=APP_TITLE, version=APP_VERSION)
@@ -81,5 +85,5 @@ async def predict(file: UploadFile = File(...)):
     return {
         "label": label,
         "prob": prob,
-        "model_version": os.path.basename(MODEL_PATH),
+        "model_version": os.path.basename(MODEL_VERSION),
     }

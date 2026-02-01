@@ -58,9 +58,10 @@ demo = gr.Interface(
     fn=infer,
     inputs=gr.Image(type="numpy", label="Chest X-ray (PNG/JPG)"),
     outputs=gr.Markdown(),
-    title="Pneumonia Detector (MVP)",
-    description="Upload a chest X-ray image to get a prediction. "
-                "This is an MVP demo — not for clinical use.",
+    title="Pneumonia Detector (Machine Learning Model)",
+    description="Upload a chest X-ray image to get a prediction."
+                "This is a project from Daniel Calvo portfolio — not for clinical use."
+                "Intended to be part of porfolio",
     allow_flagging="never",
 )
 

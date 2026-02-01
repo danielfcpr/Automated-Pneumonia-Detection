@@ -7,9 +7,6 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1
 
 # --- System libs required by TensorFlow/OpenCV (headless) ---
-# libgomp1       : OpenMP runtime (TensorFlow / some numpy ops)
-# libglib2.0-0   : GLib used by OpenCV
-# libgl1         : minimal OpenGL lib used by OpenCV headless codecs
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     libglib2.0-0 \
@@ -20,12 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 # --- Python dependencies (pinned) ---
-# Keep this step separate for better Docker layer caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # --- App code & model ---
-# Copies: app.py, utils/, models/CNN_model.keras, etc.
 COPY . .
 
 # --- Security: run as non-root ---
